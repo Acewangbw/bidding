@@ -4,8 +4,9 @@ __date__ = '2019/1/17 10:13'
 from concurrent.futures import ThreadPoolExecutor
 
 import requests
+from django.core.mail import send_mail
 
-from apps.szgbidding.models import Szgb
+from apps.szgbidding.models import Szgb, Keyword
 from utils.CrawlerUtils import CrawlerUtils
 
 
@@ -107,6 +108,7 @@ class Szzfcg:
             new_data = Szzfcg.get_new_data(data, all_identification)
             if len(new_data) >= 0:
                 Szzfcg.to_db(new_data)
+                Szzfcg.send_email(new_data)
             else:
                 print('没有需要保存的数据')
 
@@ -121,3 +123,21 @@ class Szzfcg:
         print('开始保存')
         Szgb.objects.bulk_create(datas, batch_size=500)
         print('保存完成')
+
+    @staticmethod
+    def send_email(data):
+        keywords = list(map(lambda x: x[0], Keyword.objects.filter(status=True).values_list('keywords_in_search')))
+
+        def __has_keyword(col):
+            for keyword in keywords:
+                if keyword in col['title']:
+                    print('开始发送邮件')
+
+                    content = '标题:' + col['title'] + '\r\n关键字:' + keyword + '\r\n公告时间:' + str(col['announcement_time'])
+                    print('邮件类容为:%s' % (content,))
+
+                    send_mail(col['title'], content, '249340890@qq.com',
+                              ['vfenger@qq.com', '505209759@qq.com'], fail_silently=False)
+                    print('邮件发送成功')
+
+        list(map(lambda x: __has_keyword(x), data))

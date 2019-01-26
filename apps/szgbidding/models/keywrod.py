@@ -8,7 +8,7 @@ class Keyword(models.Model):
     customer_name = models.CharField(max_length=32, verbose_name='客户名称')
     tag = models.CharField(max_length=32, blank=True, null=True, verbose_name='标签')  # 这个后期标注使用
     keywords_in_search = models.CharField(max_length=32, verbose_name='搜索关键词')
-    status = models.BooleanField(default=False, verbose_name='关键词状态')
+    status = models.BooleanField(default=True, verbose_name='关键词状态')
 
     class Meta:
         verbose_name_plural = u"标记信息"
