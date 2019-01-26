@@ -140,4 +140,5 @@ class Szzfcg:
                               ['vfenger@qq.com', '505209759@qq.com'], fail_silently=False)
                     print('邮件发送成功')
 
-        list(map(lambda x: __has_keyword(x), data))
+        t = ThreadPoolExecutor()
+        list(t.map(lambda x: __has_keyword(x), data))
