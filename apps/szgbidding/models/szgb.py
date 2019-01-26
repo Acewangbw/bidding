@@ -1,10 +1,8 @@
 # _*_ coding: utf-8 _*_
-from datetime import datetime
-
-from django.db import models
-
 _author_ = 'Ace'
 _date_ = '2019-01-20 20:59'
+
+from django.db import models
 
 
 class Szgb(models.Model):
@@ -19,4 +17,3 @@ class Szgb(models.Model):
 
     class Meta:
         verbose_name_plural = u"前端展示信息"
-        name

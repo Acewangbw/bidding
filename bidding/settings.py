@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'szgbidding',
+    'apps.szgbidding',
     # 'xadmin'
 ]
 
@@ -80,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bidding',
         'USER': 'root',
-        'PASSWORD': 'a.123456',
+        'PASSWORD': 'training',
         'HOST': '127.0.0.1'
 
     }
