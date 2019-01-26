@@ -7,6 +7,6 @@ from apps.szgbidding.jobs.szzfcg import Szzfcg
 def start_schedulers():
     sched = BackgroundScheduler()
     # TODO : add your job here
-    sched.add_job(Szzfcg.run, trigger='cron', second='*/10')
+    sched.add_job(Szzfcg.run, trigger='cron', minute='*/30')
 
     sched.start()
