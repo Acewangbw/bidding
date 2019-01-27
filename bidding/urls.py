@@ -15,14 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path
-
-from apps.szgbidding.views.szgb import index
+from apps.szgbidding.views import index
 from schedulers.manager import start_schedulers
+from szgbidding import views
+from szgbidding.views.Addkeyword import add_keyword
+# from szgbidding import views
+from szgbidding.views import Addkeyword
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^$', index.as_view(), name='index'),
+    path('index', index.as_view(), name='index'),
+    path('add_keyword/', views.Addkeyword.add_keyword),
+    # path('del_keyword/', views.Addkeyword.del_keyword),
 ]
-
-# start schedulers
+# 开始运行定时任务
 start_schedulers()

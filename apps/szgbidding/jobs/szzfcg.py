@@ -12,7 +12,6 @@ from utils.CrawlerUtils import CrawlerUtils
 
 class Szzfcg:
     url = 'http://www.szzfcg.cn/portal/topicView.do?method=view&id=2719966'
-    table_name = 'szgbidding_szgb'
 
     data = {
         'ec_i': 'topicChrList_20070702',
@@ -100,17 +99,18 @@ class Szzfcg:
                     'category': content[7].text.strip(),
                     'announcement_time': content[9].text.strip(),
 
+
                 }
                 res['identification'] = CrawlerUtils.get_md5_value(
                     res['site'] + res['title'] + res['announcement_time'])
                 data.append(res)
                 all_identification.append(res['identification'])
             new_data = Szzfcg.get_new_data(data, all_identification)
-            if len(new_data) >= 0:
+            if len(new_data) > 0:
                 Szzfcg.to_db(new_data)
                 Szzfcg.send_email(new_data)
             else:
-                print('没有需要保存的数据')
+                print('没有需要新增的数据')
 
             if total_count <= page * Szzfcg.data['topicChrList_20070702_crd']:
                 break
@@ -121,6 +121,7 @@ class Szzfcg:
         t = ThreadPoolExecutor()
         datas = list(t.map(lambda x: Szgb(**x), data))
         print('开始保存')
+        print(data)
         Szgb.objects.bulk_create(datas, batch_size=500)
         print('保存完成')
 
@@ -137,7 +138,7 @@ class Szzfcg:
                     print('邮件类容为:%s' % (content,))
 
                     send_mail(col['title'], content, '249340890@qq.com',
-                              ['vfenger@qq.com', '505209759@qq.com'], fail_silently=False)
+                              ['505209759@qq.com'], fail_silently=False)
                     print('邮件发送成功')
 
         t = ThreadPoolExecutor()

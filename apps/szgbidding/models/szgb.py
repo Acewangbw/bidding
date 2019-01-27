@@ -1,8 +1,11 @@
 # _*_ coding: utf-8 _*_
-_author_ = 'Ace'
-_date_ = '2019-01-20 20:59'
+from datetime import datetime
 
 from django.db import models
+from szgbidding.models.keyword import Keyword
+
+_author_ = 'Ace'
+_date_ = '2019-01-20 20:59'
 
 
 class Szgb(models.Model):
@@ -12,8 +15,16 @@ class Szgb(models.Model):
     category = models.CharField(max_length=32, null=True, verbose_name='品目大类')
     announcement_time = models.DateTimeField(verbose_name='更新时间')
     identification = models.CharField(max_length=32, unique=True, verbose_name='唯一表示')
+
+    url = models.URLField(max_length=32, verbose_name='URL')
+
     create_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
     update_time = models.DateTimeField(auto_now=True, verbose_name='更新时间')
 
+    # customer = models.ForeignKey(Keyword, on_delete=models.CASCADE, verbose_name='客户名称',
+    #                              related_name='bidding_customer')
+    # tag = models.ForeignKey(Keyword, on_delete=models.CASCADE, verbose_name='tag', related_name='bidding_tag')
+
     class Meta:
         verbose_name_plural = u"前端展示信息"
+        # name

@@ -2,5 +2,5 @@
 _author_ = 'Ace'
 _date_ = '2019-01-20 20:57'
 
-from apps.szgbidding.models.keywrod import Keyword
-from apps.szgbidding.models.szgb import Szgb
+from szgbidding.models.keyword import Keyword
+from szgbidding.models.szgb import Szgb
