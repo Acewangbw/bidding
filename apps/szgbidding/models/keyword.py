@@ -13,7 +13,8 @@ class Keyword(models.Model):
     keywords_in_search = models.CharField(max_length=32, verbose_name='搜索关键词')
     status = models.BooleanField(default=True, verbose_name='关键词状态')
     created_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
-    search_keyword = models.CharField(max_length=32, blank=True, null=True, verbose_name='标签')
+
+    # search_keyword = models.CharField(max_length=32, blank=True, null=True, verbose_name='标签')#
 
     class Meta:
         verbose_name_plural = u"标记信息"
