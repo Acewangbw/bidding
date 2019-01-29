@@ -25,5 +25,5 @@ class Szgb(models.Model):
     # tag = models.ForeignKey(Keyword, on_delete=models.CASCADE, verbose_name='tag', related_name='bidding_tag')
 
     class Meta:
-        verbose_name_plural = u"前端展示信息"
+        verbose_name_plural = u"政采网信息"
         # name
