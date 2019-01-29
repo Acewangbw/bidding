@@ -16,8 +16,7 @@ class Szgb(models.Model):
     announcement_time = models.DateTimeField(verbose_name='更新时间')
     identification = models.CharField(max_length=32, unique=True, verbose_name='唯一表示')
 
-    url = models.URLField(max_length=32, verbose_name='URL')
-
+    url = models.URLField(max_length=200, verbose_name='URL')
     create_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
     update_time = models.DateTimeField(auto_now=True, verbose_name='更新时间')
 

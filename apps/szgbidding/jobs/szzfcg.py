@@ -12,7 +12,7 @@ from utils.CrawlerUtils import CrawlerUtils
 
 class Szzfcg:
     url = 'http://www.szzfcg.cn/portal/topicView.do?method=view&id=2719966'
-
+    home_url = 'http://www.szzfcg.cn'
     data = {
         'ec_i': 'topicChrList_20070702',
         'topicChrList_20070702_crd': 100,
@@ -96,9 +96,9 @@ class Szzfcg:
                 res = {
                     'site': content[3].text.strip(),
                     'title': content[5].text.strip(),
+                    'url': Szzfcg.home_url + list(content[5].children)[3].attrs['href'],
                     'category': content[7].text.strip(),
                     'announcement_time': content[9].text.strip(),
-
 
                 }
                 res['identification'] = CrawlerUtils.get_md5_value(
@@ -134,11 +134,12 @@ class Szzfcg:
                 if keyword in col['title']:
                     print('开始发送邮件')
 
-                    content = '标题:' + col['title'] + '\r\n关键字:' + keyword + '\r\n公告时间:' + str(col['announcement_time'])
+                    content = '标题:' + col['title'] + '\r\n关键字:' + keyword + '\r\nURL:' + col['url'] + '\r\n公告时间:' + str(
+                        col['announcement_time'])
                     print('邮件类容为:%s' % (content,))
 
                     send_mail(col['title'], content, '249340890@qq.com',
-                              ['505209759@qq.com'], fail_silently=False)
+                              ['505209759@qq.com', '1914007838@qq.com'], fail_silently=False)
                     print('邮件发送成功')
 
         t = ThreadPoolExecutor()
